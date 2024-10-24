@@ -65,6 +65,11 @@
 						"type": "string",
 						"default": "gitlab.com",
 						"description": "Gitlab host"
+					},
+					"extension-manager.ignoreSSL": {
+						"type": "boolean",
+						"default": false,
+						"description": "Add option to ignore SSL errors"
 					}
 				}
 			}

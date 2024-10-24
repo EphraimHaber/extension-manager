@@ -2,6 +2,8 @@ import * as vscode from 'vscode';
 import { MarketplaceViewProvider } from './MarketplaceViewProvider';
 import { InstalledViewProvider } from './InstalledViewProvider';
 import { ExtensionItem } from './classes/ExtensionItem';
+import axios from 'axios';
+import { Agent } from 'https';
 import {
 	getExtensions,
 	getInstalledExtensions,
@@ -23,10 +25,18 @@ export async function activate(context: vscode.ExtensionContext) {
 	const projectId = vscode.workspace
 		.getConfiguration()
 		.get<string>('extension-manager.projectId');
+	const ignoreSSL = vscode.workspace
+		.getConfiguration()
+		.get<boolean>('extension-manager.ignoreSSL');
 
 	if (!token || !projectId) {
 		vscode.window.showErrorMessage('Project ID or token is missing.');
 		return;
+	}
+
+	if (ignoreSSL) {
+		const httpsAgent = new Agent({ rejectUnauthorized: false });
+		axios.defaults.httpsAgent = httpsAgent;
 	}
 
 	await getExtensions(context, token, gitlabHost, projectId);

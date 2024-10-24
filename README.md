@@ -20,6 +20,7 @@ This extension contributes the following settings:
 - `extensionManager.token`: GitLab personal access token.
 - `extensionManager.projectId`: GitLab project ID.
 - `extension-manager.gitlabHost`: (Optional) GitLab host. (defaults to gitlab.com)
+- `extension-manager.ignoreSSL`: (Optional) Add option to ignore SSL (useful for self hosted gitlab instances)
 
 ## Known Issues
 
